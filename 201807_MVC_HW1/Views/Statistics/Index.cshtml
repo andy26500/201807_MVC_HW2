@@ -1,0 +1,41 @@
+﻿@using _201807_MVC_HW1.Models
+@model System.Collections.Generic.List<_201807_MVC_HW1.Models.客戶統計資訊>
+
+@{
+    ViewBag.Title = "title";
+}
+
+<h2>客戶統計資訊</h2>
+@using (Html.BeginForm("Export", "Statistics", FormMethod.Post, new { id = "searchForm" }))
+{
+    <input id="btnExport" type="button" class="btn btn-success" value="匯出Excel" onclick="exportExcel();" />
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>客戶名稱</th>
+            <th>客戶聯絡人數量</th>
+            <th>客戶銀行數量</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (!Model.Any())
+        {
+            <tr>
+                <td colspan="3">目前沒有統計資料，請新增一筆客戶</td>
+            </tr>
+        }
+        else
+        {
+            foreach (客戶統計資訊 item in Model)
+            {
+                <tr>
+                    <td>@item.客戶名稱</td>
+                    <td>@item.聯絡人數量</td>
+                    <td>@item.銀行帳戶數量</td>
+                </tr>
+            }
+        }
+
+    </tbody>
+</table>
